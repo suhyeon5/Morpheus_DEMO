@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/nhlife_style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+<p class="cbtn_r">
+	<button type="button" class="cbtn_menu" data-instance-class="menu-info">샘플보기</button>
+	<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴보기</button>
+</p>
+
+<!-- content_wrap -->
+<div id="con_wrap">
+	<header id="header">
+		<h1>지점찾기</h1>
+	</header>
+
+	<!-- container -->
+	<div id="wrapper">
+		<div class="container scroller">
+		<!-- iscroll_area -->
+
+			<div class="search_office" data-instance-class="searchArea">
+				<ul>
+					<li class="hbox jc">
+						<span>지역선택</span>
+						<p class="flex"><label class="select"><button type="button" data-instance-class="address1">전체</button></label></p>
+						<p class="flex"><label class="select"><button type="button" data-instance-class="address2">전체</button></label></p>
+					</li>
+					<li class="hbox jc">
+						<span>검색조건</span>
+						<p class="flex"><label class="select"><button type="button" data-instance-class="searchCondition">전체</button></label></p>
+					</li>
+					<li class="hbox jc">
+						<span>검색어</span>
+						<input type="search" class="input_search" placeholder="이름,주소,전화번호"  data-instance-class="searchWord" />
+					</li>
+				</ul>
+				<p class="btn_area"><button type="button" class="btn_typeA width100" data-instance-class="searchBtn"><span class="icon01">검색</span></button></p>
+			</div>
+			<div>
+				<button class="btn" data-instance-class="updown"  title="검색조건 입력폼 닫기">▲</button><!-- ▼  title="검색조건 입력폼 열기" -->
+
+				<!-- D:검색전 -->
+				<div id="nodata" class="ta_c">
+					<p class="nodata_con3">NH농협생명지점을 <br />검색해주세요.</p>
+				</div>
+				<!--// D:검색전 -->
+				<!-- D:검색후 -->
+				<div class="none" id="yesdata">
+					<p class="office_list_result">총 3건 검색</p>
+					<div class="office_list">
+						<ul>
+							<li data-instance-class="store_list">
+								<dl>
+									<dt>NH농협생명 서울지역본부</dt>
+									<dd>서울시 강동구 성내동 451 농협서울지역본부 5층</dd>
+								</dl>
+								<p><img src="../../img/sample/icon_phone.png" alt=""/></p>
+							</li>
+							<li data-instance-class="store_list">
+								<dl>
+									<dt>NH농협생명 본점</dt>
+									<dd>서울시 중구 충정로1가 85</dd>
+								</dl>
+								<p><img src="../../img/sample/icon_phone.png" alt=""/></p>
+							</li>
+							<li data-instance-class="store_list">
+								<dl>
+									<dt>NH농협생명 삼성중앙지점</dt>
+									<dd>서울시 강남구 삼성동 144-19 20 JS타워 1층</dd>
+								</dl>
+								<p><img src="../../img/sample/icon_phone.png" alt=""/></p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--// D:검색후 -->
+
+		<!--// iscroll_area -->
+		</div>
+	</div>
+
+</div>
+<!--// content_wrap -->
+
+<script type="text/javascript">
+M.onReady(function(event){
+	var $address1 = $("[data-instance-class='address1']"),
+		$address2 = $("[data-instance-class='address2']"),
+		$searchCondition = $("[data-instance-class='searchCondition']"),
+		$searchWord = $("[data-instance-class='searchWord']"),
+		$searchBtn = $("[data-instance-class='searchBtn']"),
+		$searchArea = $("[data-instance-class='searchArea']");
+
+	var willIdx1 = 0,
+		willIdx2 = 0,
+		willIdx3 = 0;
+	$address1.click(function(){
+		var $this = $(this);
+		M.pop.list({
+			'list' : [
+				{title:'서울특별시', value:'서울특별시'},
+				{title:'인천광역시', value:'인천광역시'},
+				{title:'부산광역시', value:'부산광역시'}
+			],
+			'selected' : willIdx1
+		}, function(value){
+			if(value.status == "SUCCESS"){
+				$address1.html(value.title);
+				willIdx1 = value.index;
+			}
+		});
+	});
+
+	$address2.click(function(){
+		var $this = $(this);
+		M.pop.list({
+			'list' : [
+				{title:'동구', value:'동구'},
+				{title:'서구', value:'서구'},
+				{title:'남구', value:'남구'},
+				{title:'북구', value:'북구'}
+			],
+			'selected' : willIdx2
+		}, function(value){
+			if(value.status == "SUCCESS"){
+				$address2.html(value.title);
+				willIdx2 = value.index;
+			}
+		});
+	});
+
+	$searchCondition.click(function(){
+		var $this = $(this);
+		M.pop.list({
+			'list' : [
+				{title:'조건1', value:'조건1'},
+				{title:'조건2', value:'조건2'},
+				{title:'조건3', value:'조건3'}
+			],
+			'selected' : willIdx3
+		}, function(value){
+			if(value.status == "SUCCESS"){
+				$searchCondition.html(value.title);
+				willIdx3 = value.index;
+			}
+		});
+	});
+
+	$searchBtn.click(function(){
+		$("#nodata").addClass("none");
+		$("#yesdata").removeClass("none");
+	});
+
+
+	var isOpen = true,
+		tmpHeight = $searchArea.innerHeight();
+	$searchArea.css('height',tmpHeight+'px');
+	$("[data-instance-class='updown']").click(function(){
+		$searchArea.addClass('animated');
+		if(isOpen == true){
+			$searchArea.css("marginTop",  -tmpHeight + "px");
+			$(this).removeClass("btn");
+			$(this).addClass("btn_tab");
+			isOpen = false;
+		}else{
+			$searchArea.css("marginTop", "0px");
+			$(this).removeClass("btn_tab");
+			$(this).addClass("btn");
+			isOpen = true;
+		}
+	});
+
+	// uikit 링크
+	$("[data-instance-class='menu-info']").click(function(){
+		var stackInfo = M.info.stack();
+		if(stackInfo.length > 1 && stackInfo[stackInfo.length-2].key.indexOf('view_button8.html') > -1){
+			M.page.back();
+		}else{
+			M.page.html("../uikit/view_button8.html",{
+				action : "NEW_SCR",
+				orient : "PORT"
+			});
+		}
+	});
+
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+
+	// 지점 보기
+	$("[data-instance-class='store_list']").click(function(){
+		var paramObj = {};
+		switch($(this).index()){
+			case 0 :
+				paramObj.lat = '37.5291530';
+				paramObj.lng = '127.1204020';
+				paramObj.tel = '02)111-1111';
+			break;
+
+			case 1 :
+				paramObj.lat = '37.5658380';
+				paramObj.lng = '127.9676360';
+				paramObj.tel = '02)222-2222';
+			break;
+
+			case 2 :
+				paramObj.lat = '37.5072310';
+				paramObj.lng = '127.0555320';
+				paramObj.tel = '02)333-3333';
+			break;
+		}
+		paramObj.store_name = $(this).find('dt').html();
+		paramObj.address = $(this).find('dd').html();
+
+		M.page.html("s11_store_view_nhlife.html",{
+			action:"NEW_SCR",
+			orient:"PORT",
+			param : paramObj
+		})
+	});
+	
+	$("[data-instance-class='searchWord']").blur(function(){
+		window.scrollTo(0,0);
+	});
+}).onRestore(function(){
+
+}).onHide(function(){
+
+}).onResume(function(){
+
+}).onPause(function(){
+
+}).onDestroy(function(){
+
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

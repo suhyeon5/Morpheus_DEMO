@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/mobile_style.css" >
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css">
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+
+<p class="cbtn_r">
+	<button type="button" class="cbtn_menu" data-instance-class="menu-info">샘플보기</button>
+	<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴보기</button>
+</p>
+
+<header id="header" data-header="quick">
+	<div class="setTop">
+		<div class="setHeader">
+			<h1>설정</h1>
+			<a href="#" onclick="return false;"class="historyBack on" data-button="back" data-press><span>이전</span></a>
+			<button type="button" class="sitemap" data-press><span>전체메뉴</span></button>
+		</div>
+	</div>
+</header>
+
+<div id="setArea01" class="setInfo">
+	<h2>화면 설정</h2>
+	<ul class="list">
+		<li class="setStyle">
+			<p>실시간 시세</p>
+			<div class="onoffBox">
+				<input type="checkbox" name="checkbox1" title="실시간 시세" />
+			</div>
+		</li>
+		<li class="setStyle">
+			<p>화면 꺼짐 방지</p>
+			<div class="onoffBox">
+				<input type="checkbox" name="checkbox2" title="실시간 시세" />
+			</div>
+		</li>
+		<li class="setStyle">
+			<p>종목코드 업데이트<span>Updated 2012.10.31 14:20:12</span></p>
+			<button class="btnUpdate" data-press>업데이트</button>
+		</li>
+		<li data-press><a href="#" onclick="return false;"><p>시세 알림 설정</p><p>on</p></a></li>
+	</ul>
+	<h2>개인 정보 설정</h2>
+	<ul class="list">
+		<li data-press><a href="#" onclick="return false;"><p>로그인 재설정</p><p>our1000</p></a></li>
+		<li data-press><a href="#" onclick="return false;"><p>공인인증센터</p></a></li>
+	</ul>
+	<h2>기타</h2>
+	<ul class="list">
+		<li data-press><a href="#" onclick="return false;"><p>공지사항</p></a></li>
+		<li data-press><a href="#" onclick="return false;"><p>고객센터</p></a></li>
+	</ul>
+</div>
+
+<footer id="footer" data-footer="">
+</footer>
+
+<script type="text/javascript">
+M.onReady(function(evt){
+	// uikit 링크
+	$("[data-instance-class='menu-info']").click(function(){
+		var stackInfo = M.info.stack();
+		if(stackInfo.length > 1 && stackInfo[stackInfo.length-2].key.indexOf('view_content3.html') > -1){
+			M.page.back();
+		}else{
+			M.page.html("../uikit/view_content3.html",{
+				action : "NEW_SCR",
+				orient : "PORT"
+			});
+		}
+	});
+	
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+}).onRestore(function(evt){
+	
+}).onHide(function(evt){
+	
+}).onResume(function(evt){
+	
+}).onPause(function(evt){
+	
+}).onDestroy(function(evt){
+	
+}).onBack(function(evt){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

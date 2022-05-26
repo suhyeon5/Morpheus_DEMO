@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+
+<!-- Header Start -->
+<header id="header">
+	<h1>버튼</h1>
+	<button type="button" class="tbtn_l tbtn_prev">이전</button>
+	<p class="tbtn_r">
+		<button type="button" class="tbtn_home" title="홈">홈</button>
+		<button type="button" class="tbtn_menu" title="전체메뉴">전체메뉴</button>
+	</p>
+</header>
+<!--// Header End -->
+
+<!-- container Start -->
+<div id="container">
+	<section id="scroll">
+		<div>
+		<!-- scroll 영역 -->
+
+			<div id="control" class="br_t1">
+				<section>
+					<h3>텍스트 버튼</h3>
+					<p><button type="button" class="dbtn">검색</button></p>
+					<p><button type="button" class="dbtn dimed" disabled="disabled">검색</button></p>
+				</section>
+
+				<section>
+					<h3>아이콘 버튼</h3>
+					<p>
+						<button type="button" class="icon navi" title="전체메뉴">전체메뉴</button>
+						<button type="button" class="icon home" title="메인">메인</button>
+						<button type="button" class="icon close" title="닫기">닫기</button>
+						<button type="button" class="icon menu" title="메뉴">메뉴</button>
+						<button type="button" class="icon info" title="정보">정보</button>
+						<button type="button" class="icon prev" title="이전">이전</button>
+						<button type="button" class="icon next" title="다음">다음</button>
+						<button type="button" class="icon search" title="검색">검색</button>
+						<button type="button" class="icon setting" title="설정">설정</button>
+					</p>
+				</section>
+
+				<section>
+					<h3>위/아래버튼</h3>
+					<ul class="hbox jc">
+						<li class="flex">
+							<p><button type="button" class="rbtn" title="TOP"><span class="up">TOP</span></button></p>
+							<p><button type="button" class="rbtn dimed" disabled="disabled" title="TOP"><span class="up">TOP</span></button></p>
+						</li>
+						<li class="flex">
+							<p><button type="button" class="rbtn"><span class="down" title="DOWN">DOWN</span></button></p>
+							<p><button type="button" class="rbtn dimed" disabled="disabled" title="DOWN"><span class="down">DOWN</span></button></p>
+						</li>
+					</ul>
+				</section>
+			</div>
+
+
+		<!--// scroll 영역 -->
+		</div>
+	</section>
+</div>
+<!--// container End -->
+
+<!-- 전체메뉴 레이어팝업: Start -->
+<div id="popWrap" class="none"></div>
+<!--// 전체메뉴 레이어팝업: End -->
+
+<script type="text/javascript">
+M.onReady(function(){
+	$('#scroll').css('height', $('body').height() - $('#header').height() + 'px');
+}).onRestore(function(){
+
+}).onHide(function(){
+
+}).onResume(function(){
+
+}).onPause(function(){
+
+}).onDestroy(function(){
+
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

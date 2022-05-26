@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+	<title>UI Kit :: 컨텐츠 뷰 :: 맵 뷰</title>
+	<link rel="stylesheet" type="text/css" href="../../css/mobile_style.css">
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css">
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body class="s11_store_view_nhlife">
+
+<!-- header -->
+<header id="NH_header">
+	<button type="button" id="tbtn_prev" class="tbtn_l t_prev">이전</button>
+	<h1 id="store_name"></h1>
+</header>
+
+<!-- container -->
+<div id="wrapper">
+	<div class="container scroller">
+	<!-- iscroll_area -->
+
+		<div class="content office_view">
+			<div class="map_area" id="map_canvas"></div>
+			<div class="view_type1">
+				<table summary="주소,전화번호,업무시간,처리업무">
+					<colgroup>
+						<col width="24%" />
+						<col width="50%" />
+						<col width="" />
+					</colgroup>
+					<tr>
+						<th scope="row">주소</th>
+						<td colspan="2" id="address"></td>
+					</tr>
+					<tr>
+						<th scope="row">전화번호</th>
+						<td id="tel"></td>
+						<td class="br_b center" rowspan="2" ><button type="button" class="btn_call">전화걸기</button></td>
+					</tr>
+					<tr>
+						<th scope="row">업무시간</th>
+						<td >평일 09:00~19:00</td>
+					</tr>
+					<tr>
+						<th scope="row">처리업무</th>
+						<td colspan="2">
+							<ol class="ol_type1">
+								<li>1. 보험가입상담</li>
+								<li>2. 보험상품변경</li>
+								<li>3. 보험금청구</li>
+							</ol>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	<!--// iscroll_area -->
+	</div>
+</div>
+<!--// container -->
+
+<!-- 전체메뉴 레이어팝업: Start -->
+<div id="popWrap" class="none"></div>
+<!--// 전체메뉴 레이어팝업: End -->
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&region=KR"></script>
+<script type="text/javascript">
+M.onReady(function(){
+	initialize();
+	
+	$("#tbtn_prev").click(function(){
+		M.page.back();
+	});
+	
+}).onRestore(function(){
+
+}).onHide(function(){
+
+}).onResume(function(){
+
+}).onPause(function(){
+
+}).onDestroy(function(){
+
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+
+function initialize() {
+	var mapOptions = {
+		center: new google.maps.LatLng(M.data.param('lat'), M.data.param('lng')),
+		zoom: 17,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		mapTypeControl : false,
+		disableDefaultUI : true
+	};
+
+	// 지점 이름 및 주소, 전화번호 세팅
+	$('#store_name').html(M.data.param('store_name'));
+	$('#address').html(M.data.param('address'));
+	$('#tel').html(M.data.param('tel'));
+
+	var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+	$('#wrapper').css('height', $(window).height() - $('#NH_header').height() + 'px');
+	$('#map_canvas').css('height', $(window).height() - $('#NH_header').outerHeight() - $('.view_type1').outerHeight() - 6  + "px");
+	
+	
+}
+
+</script>
+</body>
+</html>

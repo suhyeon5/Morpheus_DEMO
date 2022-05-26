@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/nds_salesmng_morpheus_style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+	<header id="header">
+		<!-- Tap시 class="on"추가, 비활성시 버튼태그에 disabled 옵션 추가 -->
+		<button type="button" class="btn_back" id="btn_back">이전</button>
+		<h1>검색결과 상세</h1>
+	</header>
+	<p class="cbtn_r">
+		<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴보기</button>
+	</p>
+	<section id="content">
+		<div id="wrapper">
+			<div>
+				<table class="basic">
+					<colgroup>
+						<col style="width:35%;">
+						<col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>제품명</th>
+							<td>새우깡</td>
+						</tr>
+						<tr>
+							<th>제품코드</th>
+							<td>1234567</td>
+						</tr>
+						<tr>
+							<th>제조사명</th>
+							<td>농심</td>
+						</tr>
+						<tr>
+							<th>제품용량</th>
+							<td>80g</td>
+						</tr>
+						<tr>
+							<th>할인금액</th>
+							<td>50원</td>
+						</tr>
+						<tr>
+							<th>판매가격</th>
+							<td>1,000원</td>
+						</tr>
+						<tr>
+							<th>원산지</th>
+							<td>한국</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+<script type="text/javascript" src="../../js/ui/sample/iscroll.js"></script>
+<script type="text/javascript">
+var pageHeight;
+M.onReady(function(evt){
+	pageHeight = window.innerHeight;
+	
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+	
+	loaded();
+}).onRestore(function(evt){
+	
+}).onHide(function(evt){
+	
+}).onResume(function(evt){
+	
+}).onPause(function(evt){
+	
+}).onDestroy(function(evt){
+	
+}).onBack(function(evt){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+
+/**
+ * 스크롤 객체 생성
+ */
+var myScroll;
+function loaded() {
+	bodyHeightSet();
+	if(myScroll == undefined || myScroll == ""){
+		myScroll = new iScroll('wrapper');
+	}else{
+		myScroll.refresh();
+	}
+}
+
+/**
+ * 스크롤 높이 계산
+ */
+ 
+function bodyHeightSet() {
+	var scrollObj = document.getElementById("wrapper");
+	var header = document.getElementById("header");
+	var headerHeight = 0; // 해더 높이
+	var finalHeight = 0; // 최종적인 스크롤 영역 높이
+
+	if (header != undefined)
+		headerHeight = header.clientHeight;
+	
+	finalHeight = pageHeight - headerHeight
+	scrollObj.style.height = finalHeight + "px";
+}
+
+// 이전 페이지로 이동
+$("#btn_back").click(function () {
+	$('#btn_back').addClass("on");
+	setTimeout(function(){
+		$('#btn_back').removeClass("on");
+		M.page.back();
+	}, 200);
+});
+</script>
+</body>
+</html>

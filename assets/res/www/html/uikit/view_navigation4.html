@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+	<style type="text/css">
+		/* ===== view_menu3 ===== */
+		#footer p{position:absolute;bottom:0;left:0;z-index:98;width:100%;height:4.5rem;line-height:4.4rem;border-top:2px solid #068485;background-color:#f7f8f9;}
+		.edit_menu button{cursor:pointer;}
+		.edit_menu{position:relative;top:0;width:100%;height:100%;padding-top:0;padding-bottom:4.5rem;}
+		.edit_menu .m_mbox{position:relative;width:100%;height:100%;}
+		.edit_menu .m_mbox li button.dimed span, .edit_menu .conbox3 li.dimed button span{color:#333 !important;}
+		.edit_menu .conbox1_2 li button.dimed{background:#666;}
+		/* main 1단 */
+		.edit_menu .conbox1{position:relative;width:100%;height:58%;}
+		.edit_menu .conbox1 li{display:block;width:100%;height:100%;}
+		.edit_menu .conbox1 li.conbox1_2{display:block;width:100%;height:100%;margin:0;padding:0;line-height:1.0;background-color:#67917a;}
+		.edit_menu .conbox1 .conbox1_2 p.setting{display:block;width:100%;height:20%;vertical-align:middle;border-left:1px solid #d9dadb;background:#777 url('../../img/icon_setting.png') no-repeat 90% center;background-size:2rem;}
+		.edit_menu .conbox1 .conbox1_2 p.setting button{display:block;width:100%;height:100%;padding:0 0 0 10px;font-size:.9rem;color:#333 !important;text-align:left !important;background-color:transparent;}
+		.edit_menu .conbox1 .conbox1_2 ul{display:block;width:100%;height:80%;margin:0;padding:0;line-height:1.0;}
+		.edit_menu .conbox1 .conbox1_2 ul li{display:block;width:100%;height:100%;background-position:0 0;background-size:40%;}
+		.edit_menu .conbox1 .conbox1_2 ul li:nth-child(1){position:relative !important;width:100%;height:50% !important;background-color:#97c13c !important;}
+		.edit_menu .conbox1 .conbox1_2 ul li:nth-child(2){position:relative !important;width:100%;height:50% !important;background-color:#67917a !important;}
+		.edit_menu .conbox1 .conbox1_2 ul li button{display:block;width:100%;height:100%;margin:0;padding:0;background-color:transparent;}
+		.edit_menu .conbox1 .conbox1_2 ul li button span{position:absolute;z-index:1000;right:10px;bottom:1.2rem;margin:0;padding:0;color:#fff !important;text-align:right;line-height:1.0;}
+		/* promotion_img */
+		.edit_menu .promotion {overflow:hidden;position:relative; width:100%;height:100%; background:url('../../img/bg_dashboard.png') repeat; }
+		.edit_menu .promotion .visual { position:absolute; width:100%;height:100%; }
+		.edit_menu .promotion .visual img { width:100%; height:100%; }
+		.edit_menu .promotion .dimmed { position:absolute; width:100%;height:100%; background-color:#000; opacity:0.5;}
+		/* main 2단 */
+		.edit_menu .conbox2{width:100%;height:24%;}
+		.edit_menu .conbox2 li{position:relative !important;width:100%;height:100%;border-left:1px solid #34aecc;background-position:0 0;background-size:40%;}
+		.edit_menu .conbox2 li:nth-child(1){background-color:#f49244 !important;}
+		.edit_menu .conbox2 li:nth-child(2){background-color:#34aecc !important;}
+		.edit_menu .conbox2 li:nth-child(3){background-color:#5374b9 !important;}
+		.edit_menu .conbox2 li:first-child{border-left:0 none !important;}
+		.edit_menu .conbox2 li button{position:relative !important;display:block;width:100%;height:100%;margin:0;padding:0;background-color:transparent;}
+		.edit_menu .conbox2 li button span{position:absolute;z-index:1000;right:10px;bottom:1.2rem;margin:0;padding:0;color:#fff !important;text-align:right;line-height:1.0;}
+		/* main 3단 */
+		.edit_menu .conbox3{width:100%;height:18%;}
+		.edit_menu .conbox3 li{position:relative !important;width:100%;height:100%;border-left:1px solid #d9dadb;background-color:#777;}
+		.edit_menu .conbox3 li:first-child{border-left:0 none !important;}
+		.edit_menu .conbox3 li button{display:block;width:100%;height:100%;margin:0;padding:0;background-color:transparent;}
+		.edit_menu .conbox3 li button span{position:absolute;z-index:990;right:10px;bottom:1.2rem;margin:0;padding:0;color:#646464 !important;text-align:right;line-height:1.0;}
+		.edit_menu .conbox3 .event{background:url('../../img/icon_smenu_event.png') no-repeat 5px 5px;background-size:3rem;}
+		.edit_menu .conbox3 .app{background:url('../../img/icon_smenu_app.png') no-repeat 5px 5px;background-size:3rem;}
+		.edit_menu .conbox3 .mweb{background:url('../../img/icon_smenu_mweb.png') no-repeat 5px 5px;background-size:3rem;}
+		/* 메뉴아이콘 */
+		.edit_menu .smenu3_1{background:url('../../img/icon_smenu3_1.png');}
+		.edit_menu .smenu3_2{background:url('../../img/icon_smenu3_2.png');}
+		.edit_menu .smenu3_3{background:url('../../img/icon_smenu3_3.png');}
+		.edit_menu .smenu3_4{background:url('../../img/icon_smenu3_4.png');}
+		.edit_menu .smenu3_5{background:url('../../img/icon_smenu3_5.png');}
+		/* 메뉴삭제 */
+		.edit_menu .del{background:url('../../img/btn_menu_edit.png') no-repeat right 0 !important;background-size:4rem !important;}
+		.edit_menu .add button{font-size:0;text-indent:-20000px;}
+		.edit_menu .menu button{opacity:.5;background-size:4rem 4rem;}
+		.edit_menu .menu button{background-repeat:no-repeat;background-size:4rem 4rem;}
+		/* 메뉴설정없음 */
+		.edit_menu .nomenu{width:100%;height:100%;margin:0 !important;padding:0 !important;line-height:1 !important;background:url('../../img/bg_no_menu.png') no-repeat center center !important;background-size:7rem !important;}
+		.edit_menu_txt{color:#218f9f;text-align:center !important;line-height:45px;}
+	</style>
+</head>
+<body>
+
+<!-- Header Start -->
+<header id="header">
+	<h1>커스텀 메뉴</h1>
+	<button type="button" class="tbtn_l tbtn_prev">이전</button>
+	<p class="tbtn_r">
+		<button type="button" class="tbtn_home" title="홈">홈</button>
+		<button type="button" class="tbtn_menu" title="전체메뉴">전체메뉴</button>
+	</p>
+</header>
+<!--// Header End -->
+<div id="container">
+	<p class="cbtn_r">
+		<button type="button" class="cbtn_info" data-instance-class="info-btn">도움말보기</button>
+	</p>
+
+	<!-- view_menu3 -->
+		<div class="edit_menu">
+			<div class="m_mbox">
+				<ul class="conbox1 hbox jc">
+					<li class="flex promotion">
+						<div class="visual"><img src="../../img/icon_dashboard_main.png" border="0" /></div>
+						<div class="dimmed"></div>
+					</li>
+					<li class="conbox1_2 flex2">
+						<p class="setting" id="menuSetting"><button type="button" disabled>메뉴설정</button></p>
+						<ul>
+							<li class="nomenu add" data-custom-menu="nomenu"><button type="button">메뉴추가</button></li>
+							<li class="menu del" data-custom-menu="menu"><button type="button" class="smenu3_2" data-menu="smenu3_2"><span>설정메뉴2</span></button></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="conbox2 hbox jc">
+					<li data-custom-menu="menu" class="menu flex del"><button type="button" class="smenu3_3" data-menu="smenu3_3"><span>설정메뉴3</span></button></li>
+					<li data-custom-menu="menu" class="menu flex del"><button type="button" class="smenu3_4" data-menu="smenu3_4"><span>설정메뉴4</span></button></li>
+					<li data-custom-menu="menu" class="menu flex del"><button type="button" class="smenu3_5" data-menu="smenu3_5"><span>설정메뉴5</span></button></li>
+				</ul>
+				<ul class="conbox3 hbox jc">
+					<li class="flex dimed"><button type="button" class="event" disabled><span>고정메뉴1</span></button></li>
+					<li class="flex dimed"><button type="button" class="app" disabled><span>고정메뉴2</span></button></li>
+					<li class="flex dimed"><button type="button" class="mweb" disabled><span>고정메뉴3</span></button></li>
+				</ul>
+			</div>
+		</div>
+		<footer id="footer">
+			<p class="edit_menu_txt">메뉴 삭제 후 원하는 메뉴를 추가해보세요!</p>
+		</footer>
+	<!--// view_menu3 -->
+
+</div>
+
+<!-- 전체메뉴 레이어팝업: Start -->
+<div id="popWrap" class="none"></div>
+<!--// 전체메뉴 레이어팝업: End -->
+
+<!-- 도움말 팝업: Start -->
+<div class="layer_shadow" data-instance-class="info-pop">
+	<div id="layer_con1" class="layerPop hbox jc">
+		<div class="flex width100" data-instance-class="info-cont">
+			<header>
+				<h1>커스텀 메뉴</h1>
+				<button type="button" class="close" data-instance-class="info-close">닫기</button>
+			</header>
+			<div class="layer_container2">
+				<p>메뉴를 고정으로 제공하지 않고, 사용자가 원하는 메뉴로 등록 및 편집이 가능한 기능입니다. </p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 도움말 팝업: End -->
+
+<script type="text/javascript">
+M.onReady(function(){
+	$('#container').css('height', $('body').height() - $('#header').height() + "px");
+
+	// 도움말 기능
+	$("[data-instance-class='info-btn']").click(function(){
+		$("[data-instance-class='info-pop']").css({
+			'visibility': 'visible'
+		}).hide().fadeIn('slow');
+	});
+	$("[data-instance-class='info-close']").click(function(){
+		$("[data-instance-class='info-pop']").fadeOut('slow');
+	});
+
+	$("[data-custom-menu]").on("click", menufn);
+
+	function menufn(){
+		if($(this).attr('data-custom-menu') == "nomenu"){	 //  메뉴가 없는 경우
+			var $this = $(this);
+			M.pop.list({
+				'list' : [
+					{title: '설정메뉴1', value: 'smenu3_1'},
+					{title: '설정메뉴2', value: 'smenu3_2'},
+					{title: '설정메뉴3', value: 'smenu3_3'},
+					{title: '설정메뉴4', value: 'smenu3_4'},
+					{title: '설정메뉴5', value: 'smenu3_5'}
+				],
+				'selected' : 0
+			}, function(value){
+				if(value.status == "SUCCESS"){
+					$this.attr('data-custom-menu', 'menu');
+					$this.removeClass("nomenu add");
+					$this.addClass("menu del");
+					$this.children().html('');
+					$this.children().attr('data-menu',"smenu3_" +  (value.selectedIdx + 1));
+					$this.children().addClass("smenu3_" +  (value.selectedIdx + 1));
+					$this.children().html("<span>설정메뉴"+(value.selectedIdx + 1)+"</span>");
+				}
+			});
+		}else{	// 메뉴가 있는 경우
+			if(confirm("메뉴를 삭제하시겠습니까?")){
+				$(this).attr('data-custom-menu', 'nomenu');
+				$(this).removeClass("menu del");
+				$(this).addClass("nomenu add");
+				$(this).children().removeClass($(this).children().attr('data-menu'));
+				$(this).children().html('메뉴추가');
+			}
+		}
+	}
+}).onRestore(function(){
+
+}).onHide(function(){
+
+}).onResume(function(){
+
+}).onPause(function(){
+
+}).onDestroy(function(){
+
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

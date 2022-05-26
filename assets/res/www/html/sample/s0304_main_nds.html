@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/nds_salesmng_morpheus_style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+	<div class="fullmenu" id="fullmenu">
+		<ul>
+			<li class="active"><p><span class="none">Home</span></p></li>
+			<li><p><span class="none">주문입력</span></p></li>
+			<li><p><span class="none">배송조회</span></p></li>
+			<li><p><span class="none">메뉴3</span></p></li>
+			<li><p><span class="none">메뉴4</span></p></li>
+			<li><p><span class="none">설정</span></p></li>
+		</ul>
+		<div class="btm_bar">
+			<button type="button" class="btn_end"><span class="none">종료</span></button>
+			<button type="button" class="btn_set"><span class="none">설정</span></button>
+		</div>
+	</div>
+	<div class="home vbox cc" id="home">
+			<button type="button" class="btn_menu" id="btn_menu"><span class="none">메뉴</span></button>
+			<button type="button" class="btn_sear"><span class="none">검색</span></button>
+			<button type="button" class="btn_bran"><span class="none">지점</span></button>
+			<button type="button" class="btn_site"><span class="none">사이트맵</span></button>
+		<section class="home_box flex">
+			<h1 class="h_logo"><span class="none">농심<br>Smart Mobile Service<br>Taste NONGSHIM Feel the Happiness<br>영업주문 관리</span></h1>
+			<div class="h_profile"><span class="none">강동원(본사, 물류팀)</span></div>
+			<div class="h_date"><span class="none">2013.04.03 (수)</span></div>
+			<ul class="h_menu">
+				<li><span class="none">주문입력</span></li>
+				<li><span class="none">배송조회</span></li>
+				<li><span class="none">메뉴3</span></li>
+				<li><span class="none">메뉴4</span></li>
+			</ul>
+		</section>
+		<div class="h_notice" style="position:fixed;"><p><span class="none">공지사항</span></p></div>
+	</div>
+	<p class="cbtn_r" style="top:50px">
+		<button type="button" class="cbtn_menu" data-instance-class="menu-info">샘플보기</button>
+		<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴닫기</button>
+	</p>
+
+<script type="text/javascript">
+M.onReady(function(event) {
+    // TODO : ready event handle code here
+    
+    // 정보보기
+	$("[data-instance-class='menu-info']").click(function(){
+		var stackInfo = M.info.stack();
+		if( event.param.page == "main" ){
+			if(stackInfo.length > 1 && stackInfo[stackInfo.length-2].key.indexOf('view_navigation1.html') > -1){
+				M.page.back();
+			}else{
+				M.page.html("../uikit/view_navigation1.html",{
+					action : "NEW_SCR",
+					orient : "PORT"
+				});
+			}
+		}else{
+			if(stackInfo.length > 1 && stackInfo[stackInfo.length-2].key.indexOf('view_navigation3.html') > -1){
+				M.page.back();
+			}else{
+				M.page.html("../uikit/view_navigation3.html",{
+					action : "NEW_SCR",
+					orient : "PORT"
+				});
+			}
+		}
+	});
+	
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+    
+    if( event.param.page == "navigation"){
+		leftMenuFlag = true;
+		$('#home').css('left', (home.clientWidth * 0.75) + 'px');
+		fullmenu.style.marginRight = home.clientWidth * 0.25 + 'px';
+    }
+
+}).onRestore(function(event) {
+    // TODO : restore event handle code here
+
+}).onHide(function(event) {
+    // TODO : hide event handle code here
+
+}).onResume(function(event) {
+    // TODO : resume event handle code here
+
+}).onDestroy(function(event) {
+    // TODO : destroy event handle code here
+
+}).onBack(function() {
+    // TODO : back event handle code here
+    M.page.back();
+}).onKey(function(event) {
+    // TODO : key event handle code here(android only)
+
+});
+
+/**
+ * 개발 영역
+ */
+var btn_menu = document.querySelector('#btn_menu'),	// 좌측 메뉴 버튼
+	home = document.querySelector('#home'),					// 메인 화면
+	fullmenu = document.querySelector('#fullmenu'),			// 전체 메뉴
+	leftMenuFlag = false;														// 좌측 메뉴 클릭시 flag
+
+// 좌측 버튼 클릭시
+$("#btn_menu").click(function () {
+	$('#btn_menu').addClass("on");
+	setTimeout(function(){
+		$('#btn_menu').removeClass("on");
+		leftToggleFunc();
+	}, 200);
+});
+
+function leftToggleFunc(){
+	if(leftMenuFlag == false){	// 설정 열기
+		leftMenuFlag = true;
+		$('#home').animate({
+			left : (home.clientWidth * 0.75) + 'px'
+			,time : '0.2s'
+		});
+		fullmenu.style.marginRight = home.clientWidth * 0.25 + 'px';
+	}else{						// 설정 닫기
+		leftMenuFlag = false;
+		$('#home').animate({
+			left : '0px'
+			,time : '0.2s'
+		})
+	}
+}
+</script>
+</body>
+</html>

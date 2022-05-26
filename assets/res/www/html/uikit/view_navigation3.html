@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body class="view-navigation3">
+
+<!-- Header Start -->
+<header id="header">
+	<h1>사이드 메뉴</h1>
+	<button type="button" class="tbtn_l tbtn_prev">이전</button>
+	<p class="tbtn_r">
+		<button type="button" class="tbtn_home" title="홈">홈</button>
+		<button type="button" class="tbtn_menu" title="전체메뉴">전체메뉴</button>
+	</p>
+</header>
+<!--// Header End -->
+<div id="container">
+	<p class="cbtn_r">
+		<button type="button" class="cbtn_info" data-instance-class="info-btn">도움말보기</button>
+		<button type="button" class="cbtn_menu" data-instance-class="sample-btn">샘플보기</button>
+	</p>
+
+	<!-- container -->
+	<div id="scroller">
+		<div>
+		<!-- iscroll_area -->
+
+			<div class="fullmenu" id="fullmenu">
+				<ul>
+					<li class="active"><p><span class="none">Home</span></p></li>
+					<li><p><span class="none">메뉴1</span></p></li>
+					<li><p><span class="none">메뉴2</span></p></li>
+					<li><p><span class="none">메뉴3</span></p></li>
+					<li><p><span class="none">메뉴4</span></p></li>
+					<li><p><span class="none">설정</span></p></li>
+				</ul>
+				<div class="btm_bar">
+					<button type="button" class="btn_end"><span class="none">종료</span></button>
+					<button type="button" class="btn_set"><span class="none">설정</span></button>
+				</div>
+			</div>
+			<div class="home vbox cc" id="home">
+					<button type="button" class="btn_menu" id="btn_menu"><span class="none">메뉴</span></button>
+					<button type="button" class="btn_sear"><span class="none">검색</span></button>
+					<button type="button" class="btn_bran"><span class="none">지점</span></button>
+					<button type="button" class="btn_site"><span class="none">사이트맵</span></button>
+				<section class="home_box flex">
+					<h1 class="h_logo"><span class="none">농심<br>Smart Mobile Service<br>Taste NONGSHIM Feel the Happiness<br>영업주문 관리</span></h1>
+					<div class="h_profile"><span class="none">강동원(본사, 물류팀)</span></div>
+					<div class="h_date"><span class="none">2013.04.03 (수)</span></div>
+					<ul class="h_menu">
+						<li><span class="none">주문입력</span></li>
+						<li><span class="none">배송조회</span></li>
+						<li><span class="none">메뉴3</span></li>
+						<li><span class="none">메뉴4</span></li>
+					</ul>
+				</section>
+				<div class="h_notice"><p><span class="none">공지사항</span></p></div>
+			</div>
+
+
+<!--// iscroll_area -->
+		</div>
+	</div>
+	<!--// container -->
+
+</div>
+<!-- 전체메뉴 레이어팝업: Start -->
+<div id="popWrap" class="none"></div>
+<!--// 전체메뉴 레이어팝업: End -->
+
+<!-- 도움말 팝업: Start -->
+<div class="layer_shadow" data-instance-class="info-pop">
+	<div id="layer_con1" class="layerPop hbox jc">
+		<div class="flex width100" data-instance-class="info-cont">
+			<header>
+				<h1>사이드 메뉴</h1>
+				<button type="button" class="close" data-instance-class="info-close">닫기</button>
+			</header>
+			<div class="layer_container2">
+				<p>메뉴를 전면에 노출시키지 않고, 어떤 화면에서든 원하는 메뉴로 빠르게 이동할 수 있도록  버튼 선택 시, 사이드 되는 메뉴 네비게이션입니다.  </p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 도움말 팝업: End -->
+
+<script type="text/javascript">
+M.onReady(function(){
+	$("#scroller").css('height', $('body').height() - $("#header").height() + 'px');
+	
+	// 도움말 기능
+	$("[data-instance-class='info-btn']").click(function(){
+		$("[data-instance-class='info-pop']").css({
+			'visibility': 'visible'
+		}).hide().fadeIn('slow');
+	});
+	$("[data-instance-class='info-close']").click(function(){
+		$("[data-instance-class='info-pop']").fadeOut('slow');
+	});
+
+	// 샘플페이지 링크
+	$("[data-instance-class='sample-btn']").click(function(){
+		M.page.html('../sample/s0304_main_nds.html',{
+			action:"NEW_SCR",
+			orient:"PORT",
+			param: {"page":"navigation"}
+		})
+	});
+}).onRestore(function(){
+
+}).onHide(function(){
+
+}).onResume(function(){
+
+}).onPause(function(){
+
+}).onDestroy(function(){
+
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

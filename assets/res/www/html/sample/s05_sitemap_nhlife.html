@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/nhlife_style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+<p class="cbtn_r">
+	<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴보기</button>
+</p>
+
+<!-- fullPop -->
+<div class="fullPop" id="detail_view">
+	<header id="header">
+		<h1>전체메뉴</h1>
+		<button type="button" class="tbtn_r t_close" onclick="layerClose()">닫기</button>
+	</header>
+
+	<!-- container -->
+	<div id="wrapper" class="pop_container">
+		<div class="scroller">
+		<!-- iscroll_area -->
+
+			<div class="allmenu_pop">
+				<h2>보험계약조회</h2>
+				<ul>
+					<li><button type="button">계약내용조회</button></li>
+					<li><button type="button">변액보험조회</button></li>
+					<li><button type="button">고객정보조회</button></li>
+					<li>&nbsp;</li>
+				</ul>
+				<h2>보험계약대출</h2>
+				<ul>
+					<li><button type="button">계약대출신청</button></li>
+					<li><button type="button">계약대출상환</button></li>
+					<li><button type="button">계약대출내역조회</button></li>
+					<li>&nbsp;</li>
+				</ul>
+
+				<h2>보험계약관리</h2>
+				<ul>
+					<li><button type="button">변액보험펀드변경</button></li>
+					<li><button type="button">보험증권재발행</button></li>
+					<li><button type="button">자동이체계좌관리</button></li>
+					<li></li>
+				</ul>
+
+				<h2>입출금서비스</h2>
+				<ul>
+					<li><button type="button">보험료납입</button></li>
+					<li><button type="button">보험료추가납입</button></li>
+					<li><button type="button">만기보험금</button></li>
+					<li><button type="button">중도급부금</button></li>
+					<li><button type="button">휴면보험금</button></li>
+					<li><button type="button">배당금</button></li>
+					<li><button type="button">보험중도인출</button></li>
+					<li><button type="button">사고보험금</button></li>
+				</ul>
+
+				<h2>신용대출</h2>
+				<ul>
+					<li><button type="button">신용대출신청</button></li>
+					<li><button type="button">대출거래내역조회</button></li>
+					<li><button type="button">대출원리금상환</button></li>
+					<li><button type="button">자동이체계좌관리</button></li>
+				</ul>
+
+				<h2>고객센터</h2>
+				<ul>
+					<li><button type="button">공지사항</button></li>
+					<li><button type="button">이벤트</button></li>
+					<li><button type="button">공인인증센터</button></li>
+					<li><button type="button">고객센터연결</button></li>
+					<li><button type="button">상담신청</button></li>
+					<li><button type="button">지점찾기</button></li>
+				</ul>
+			</div>
+
+		<!--// iscroll_area -->
+		</div>
+	</div>
+	<!--// container -->
+</div>
+<!--// fullPop -->
+
+
+<!-- script -->
+<script type="text/javascript" src="../../js/ui/sample/iscroll.js"></script>
+<script type="text/javascript">
+M.onReady(function(evt){
+
+	$("#wrapper").css("height", $(window).height() - $("#header").outerHeight());
+	
+	iscroll = new iScroll("wrapper");
+	
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+}).onRestore(function(evt){
+	
+}).onHide(function(evt){
+	
+}).onResume(function(evt){
+	
+}).onPause(function(evt){
+	
+}).onDestroy(function(evt){
+	
+}).onBack(function(evt){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

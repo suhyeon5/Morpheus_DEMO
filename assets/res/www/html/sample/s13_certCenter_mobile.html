@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/mobile_style.css">
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css">
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+
+<p class="cbtn_r" style="margin-top:-7px">
+	<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴보기</button>
+</p>
+
+<header id="header" data-header="quick">
+	<div class="setTop">
+		<div class="setHeader">
+			<h1>공인인증센터</h1>
+			<a href="#" onclick="return false;" class="historyBack" data-button="back"><span>이전</span></a>
+			<button type="button" class="sitemap"><span>전체메뉴</span></button>
+		</div>
+	</div>
+</header>
+
+<div id="setArea01">
+	<ul class="list certifyMenu">
+		<li id="getCertPage" data-press="groupA" class="disabled"><a href="javascript:void(0);" onclick="return false;">공인인증서 가져오기</a></li>
+		<li id="infoCertPage" data-press="groupA" class="disabled"><a href="javascript:void(0);" onclick="return false;">공인인증서 발급안내</a></li>
+		<li id="managerCertPage" data-press="groupA"><a href="#" onclick="return false;">공인인증서 관리</a></li>
+	</ul>
+</div>
+
+<footer id="footer">
+	<div class="handler"></div>
+	<ul class="myMenu">
+		<li class="homeMenu on"><a href="#" onclick="return false;"><span>홈</span></a></li>
+		<li class="menu0 icon0 se"><a href="#" onclick="return false;"><span>주식현재가</span></a></li>
+		<li class="menu1 icon1"><a href="#" onclick="return false;"><span>관심종목</span></a></li>
+		<li class="menu2 icon2"><a href="#" onclick="return false;"><span>주식주문</span></a></li>
+		<li class="menu3 icon3"><a href="#" onclick="return false;"><span>매매동향분석</span></a></li>
+		<li class="menu4 icon4"><a href="#" onclick="return false;"><span>특징주순위</span></a></li>
+		<li class="menu5 icon5"><a href="#" onclick="return false;"><span>업종시세</span></a></li>
+		<li class="menu6 icon6 move"><a href="#" onclick="return false;"><span>시간외주문</span></a></li>
+		<li class="menu7 icon7"><a href="#" onclick="return false;"><span>예약주문</span></a></li>
+		<li class="menu8 icon8 on"><a href="#" onclick="return false;"><span>단주주문</span></a></li>
+		<li class="menu9 icon9"><a href="#" onclick="return false;"><span>신용주문</span></a></li>
+		<li class="menu10 icon10"><a href="#" onclick="return false;"><span>계좌</span></a></li>
+		<li class="menu11 icon11"><a href="#" onclick="return false;"><span>뉴스/시황</span></a></li>
+		<li class="menu12 icon12"><a href="#" onclick="return false;"><span>주요지수</span></a></li>
+		<li class="menu13 icon13"><a href="#" onclick="return false;"><span>기업정보</span></a></li>
+		<li class="menu14 icon14"><a href="#" onclick="return false;"><span>&nbsp;</span></a></li>
+		<li class="menu15 icon15"><a href="#" onclick="return false;"><span>&nbsp;</span></a></li>
+		<li class="setMenu"><a href="#" onclick="return false;"><span>설정</span></a></li>
+		<li class="mmText">메뉴를 길게 누른 후 위치를 변경해주세요!</li>
+	</ul>
+	<dl class="tickerArea">
+		<dt class="down">KOSPI</dt>
+		<dd class="down">2,801.74</dd>
+		<dd class="down iconDown">1.61</dd>
+		<dd class="down">2.21%</dd>
+		<dt class="up">KOSDAQ</dt>
+		<dd class="up">2,801.74</dd>
+		<dd class="up iconUp">1.61</dd>
+		<dd class="up">2.21%</dd>
+	</dl>
+</footer>
+
+<script type="text/javascript">
+M.onReady(function(evt){
+	$("#managerCertPage").click(function(){
+		M.page.html("s13_certList_mobile.html",{
+			action:"NEW_SCR",
+			orient:"PORT"
+		});
+	});
+	
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+}).onRestore(function(evt){
+	
+}).onHide(function(evt){
+	
+}).onResume(function(evt){
+	
+}).onPause(function(evt){
+	
+}).onDestroy(function(evt){
+	
+}).onBack(function(evt){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

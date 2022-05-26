@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/nhlife_style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+	<style type="text/css">
+		/* content btn */
+		.cbtn_r{position:absolute;top:2rem;right:.9rem;z-index:999;}
+		.cbtn_menu{width:3.9rem;height:3.9rem;font-size:0;text-indent:-200000px;background:url('../../img/cbtn_menu.png') no-repeat 0 0;background-size:100%;}
+		.cbtn_info{width:3.9rem;height:3.9rem;font-size:0;text-indent:-200000px;background:url('../../img/cbtn_info.png') no-repeat 0 0;background-size:100%;}
+	</style>
+</head>
+<body>
+
+<!-- content_wrap -->
+<div id="con_wrap">
+	<p class="cbtn_r">
+		<button type="button" class="cbtn_menu" data-instance-class="menu-info">샘플보기</button>
+		<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴보기</button>
+	</p>
+	<header id="header">
+		<h1>공지사항</h1>
+	</header>
+
+	<!-- container -->
+	<div id="wrapper">
+		<div class="container scroller">
+		<!-- iscroll_area -->
+
+			<div class="notice_list">
+				<!-- List -->
+				<ul data-instance-class="goDetail">
+					<li>
+						<p class="date">2013.08.06</p>
+						<h2>[입찰]친숙·니즈환기 컨텐츠 개발업체 선정[입찰]친숙·니즈환기 컨텐츠 개발업체 선정</h2>
+					</li>
+					<li>
+						<p class="date">2013.08.06</p>
+						<h2>[입찰]친숙·니즈환기 컨텐츠 개발업체 선정[입찰]친숙·니즈환기 컨텐츠 개발업체 선정</h2>
+					</li>
+					<li>
+						<p class="date">2013.08.06</p>
+						<h2>[입찰]친숙·니즈환기 컨텐츠 개발업체 선정[입찰]친숙·니즈환기 컨텐츠 개발업체 선정</h2>
+					</li>
+					<li>
+						<p class="date">2013.08.06</p>
+						<h2>[입찰]친숙·니즈환기 컨텐츠 개발업체 선정[입찰]친숙·니즈환기 컨텐츠 개발업체 선정</h2>
+					</li>
+					<li>
+						<p class="date">2013.08.06</p>
+						<h2>[입찰]친숙·니즈환기 컨텐츠 개발업체 선정[입찰]친숙·니즈환기 컨텐츠 개발업체 선정</h2>
+					</li>
+				</ul>
+			</div>
+				<!-- [D:btn]목록이 한페이지 이상인 경우 -->
+			<div class="btn_area"><button type="button" class="btn_more">더보기</button></div>
+
+		<!--// iscroll_area -->
+		</div>
+	</div>
+</div>
+<!--// content_wrap -->
+
+<script type="text/javascript">
+M.onReady(function(){
+	// uikit 링크
+	$("[data-instance-class='menu-info']").click(function(){
+		var stackInfo = M.info.stack();
+		if(stackInfo.length > 1 && stackInfo[stackInfo.length-2].key.indexOf('view_content1.html') > -1){
+			M.page.back();
+		}else{
+			M.page.html("../uikit/view_content1.html",{
+				action : "NEW_SCR",
+				orient : "PORT"
+			});
+		}
+	});
+	
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+	
+	$("[data-instance-class='goDetail']>li").click(function(){
+		// 페이지 이동
+		M.page.html("s10_noticeView_nhlife.html",{
+			action:"NEW_SCR",
+			orient:"PORT"
+		});
+	})
+}).onRestore(function(){
+	
+}).onHide(function(){
+	
+}).onResume(function(){
+	
+}).onPause(function(){
+	
+}).onDestroy(function(){
+	
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

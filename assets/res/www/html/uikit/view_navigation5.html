@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+	<style type="text/css">
+		#topInfoArea{width:100%;height:5.5em;margin:0;padding:0;}
+		#topInfoArea .eventInfoArea{position:relative;width:100%;height:5em;background:#e0e0e0;box-shadow:0 0 3px rgba(0,0,0,0.6);}
+		/* Quick Button */
+		#topInfoArea .quickBtn{position:absolute;top:0;right:0.4em;z-index:10;}
+		#topInfoArea .quickBtn button{width:3.4em;height:3.5em;background:url("../../img/sample_mobile/icon_quickbutton.png");background-size:6.8em 10.5em;}
+		#topInfoArea .quickBtn button.open{background-position:0 0;}
+		#topInfoArea .quickBtn button.open.on{background-position:0 -3.5em;}
+		#topInfoArea .quickBtn button.open.dim{background-position:0 -7em;}
+		#topInfoArea .quickBtn button.close{background-position:-3.4em 0;}
+		#topInfoArea .quickBtn button.close.on{background-position:-3.4em -3.5em;}
+		#topInfoArea .quickBtn button span{visibility:hidden;overflow:hidden;position:absolute;left:-1000em;width:0;height:0;font-size:0;line-height:0;}
+		.eventInfoArea h3 { width:100%; height:3rem; text-align:center; color:#333; font-size:1.6rem !important; line-height:3rem; padding-top:.6rem; }
+		/* layer dropdownBox */
+		.dropdownBox{display:block;position:absolute;top:0;left:0;z-index:990;width:100%;height:4.5rem;margin:0;padding:.4rem 0 0 0;text-align:center;background:#152b75;}
+		/* Select Box */
+		.dropdownBox .selectBox{margin-left:0.45rem;padding:0.3rem;}
+		.dropdownBox .selectBox button{width:4.2rem; height:3.2rem;}
+		/* icon */
+		.btnBuy, .btnSale{box-shadow:0 1px rgba(0,0,0,0.4);font-size:1.4em;color:#fff !important;}
+		.btnBuy{background:#d82725;border:1px solid #ff4949;}
+		.btnBuy.on{background:#960707;border:1px solid #5d0b0b;}
+		.btnSale{background:#006bb1;border:1px solid #2882e6;}
+		.btnSale.on{background:#075496;border:1px solid #1b4971;}
+		
+		.btnBookmark, .btnRateReturn, .btnAnnonce {
+			background:#8f8f8f;
+			border:1px solid #a6a6a6;
+			box-shadow:0 1px rgba(0,0,0,0.4);
+			position:relative;
+			overflow:hidden;
+		}
+		
+		.btnBookmark span , .btnRateReturn span , .btnAnnonce span {
+			background:url("../../img/sample_mobile/icon_quickmenu.png") no-repeat 0 0;
+			background-size:13.5rem 6.1rem;
+			width:4.2rem; height:3.2rem;
+			left:0; top:0;
+		}
+		
+		.btnBookmark span {background-position:-0.2rem 0rem;}
+		.btnBookmark.on span {background-position:-0.2rem -3.1rem;}
+		.btnRateReturn span {background-position:-4.6rem 0em;}
+		.btnRateReturn.on span {background-position:-4.6rem -3.1rem;}
+		.btnAnnonce span {background-position:-9.2rem 0rem;}
+		.btnAnnonce.on span {background-position:-9.2rem -3.1rem;}
+		
+		.btnBookmark.ac, .btnRateReturn.ac, .btnAnnonce.ac{background-color:#606060;border:1px solid #525252;}
+		.btnBookmark span, .btnRateReturn span, .btnAnnonce 	span{position:absolute;text-indent:-1000em;font-size:0;line-height:0;}
+		
+	</style>
+</head>
+<body>
+
+<!-- Header Start -->
+<header id="header">
+	<h1>퀵메뉴</h1>
+	<button type="button" class="tbtn_l tbtn_prev">이전</button>
+	<p class="tbtn_r">
+		<button type="button" class="tbtn_home" title="홈">홈</button>
+		<button type="button" class="tbtn_menu" title="전체메뉴">전체메뉴</button>
+	</p>
+</header>
+<!--// Header End -->
+
+<p class="cbtn_r" style="top:11rem">
+	<button type="button" class="cbtn_info" data-instance-class="info-btn">도움말보기</button>
+</p>
+
+<!-- container Start -->
+<div id="container">
+
+	<div id="topInfoArea">
+		<div class="eventInfoArea">
+			<!-- Quick Button
+				 open	  : class="open"
+				 open+tap : class="open on"
+				 open+dim : class="open dim"
+				 close	  : class="close"
+				 close+tap: class="close on" -->
+			<h3>우측의 퀵 버튼을 눌러 보세요.</h3>
+			<div class="quickBtn">
+				<button type="button" class="open" data-instance-class="open"><span>Quick Button</span></button>
+			</div>
+			<!-- // Quick Button -->
+		</div>
+	</div>
+</div>
+<!--// container End -->
+
+<!-- Dropdown Box -->
+<div class="dropdownBox" data-instance-class="dropbox" style="visibility:hidden">
+	<div class="selectBox" >
+		<button type="button" class="btnBuy on" id="btnBuy"><span>매수</span></button>
+		<button type="button" class="btnSale" id="btnSale"><span>매도</span></button>
+		<button type="button" class="btnBookmark ac on" id="btnBookmark"><span>관심종목</span></button>
+		<button type="button" class="btnRateReturn " id="btnRateReturn"><span>가상수익률</span></button>
+		<button type="button" class="btnAnnonce ac on" id="btnAnnonce"><span>알림</span></button>
+	</div>
+</div>
+<!-- // Dropdown Box -->
+
+<!-- 전체메뉴 레이어팝업: Start -->
+<div id="popWrap" class="none"></div>
+<!--// 전체메뉴 레이어팝업: End -->
+
+<!-- 도움말 팝업: Start -->
+<div class="layer_shadow" data-instance-class="info-pop" displaye="none;">
+	<div id="layer_con1" class="layerPop hbox jc">
+		<div class="flex width100" data-instance-class="info-cont">
+			<header>
+				<h1>퀵 메뉴</h1>
+				<button type="button" class="close" data-instance-class="info-close">닫기</button>
+			</header>
+			<div class="layer_container2">
+				<p>현재 위치한 화면과 연계된 다른 메뉴로 빠르게 이동이 필요한 경우 활용할 수 있습니다.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 도움말 팝업: End -->
+
+<script type="text/javascript">
+M.onReady(function(){
+	
+	var isQuick = false;
+	var dropboxHeight = parseInt($("[data-instance-class='dropbox']").css("height")) * -1;
+	$("[data-instance-class='dropbox']").css("top", dropboxHeight);
+	$("[data-instance-class='dropbox']").css('visibility', 'visible');
+	$("[data-instance-class='open']").click(function(){
+		if(isQuick == false){
+			$(this).removeClass("open");
+			$(this).addClass("close");
+			$("[data-instance-class='dropbox']").animate({
+				top:0
+			});
+			isQuick = true;
+		}else{
+			$(this).removeClass("close");
+			$(this).addClass("open");
+			$("[data-instance-class='dropbox']").animate({
+				top:dropboxHeight
+			});
+			isQuick = false;
+		}
+	});
+	
+	$(".dropdownBox .selectBox button").click(function(e) {
+		var isOn = $(this).hasClass("on");
+		if ( isOn ) {
+			$(this).removeClass("on");
+		}
+		else {
+			$(this).addClass("on");
+		};
+	});
+	
+	// 도움말 기능
+	$("[data-instance-class='info-btn']").click(function(){
+		$("[data-instance-class='info-pop']").css({
+			'visibility': 'visible'
+		}).hide().fadeIn('slow');
+	});
+	$("[data-instance-class='info-close']").click(function(){
+		$("[data-instance-class='info-pop']").fadeOut('slow');
+	});
+}).onRestore(function(){
+
+}).onHide(function(){
+
+}).onResume(function(){
+
+}).onPause(function(){
+
+}).onDestroy(function(){
+
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

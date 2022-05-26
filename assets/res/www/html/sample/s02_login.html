@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/nds_salesmng_morpheus_style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+
+<body id="bodyId">
+	<section class="intro">
+	<p class="cbtn_r">
+		<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴닫기</button>
+	</p>
+		<div class="i_header">
+			<h2>농심 Smart Mobile Service</h2>
+		</div>
+		<div class="login_wrap">
+		<div class="login">
+			<div class="login_input">
+				<div class="input_group"><input type="text" id="loginId" value="" title="사용자 아이디"></div>
+				<div class="input_group"><input type="password" id="loginPw" value = "" title="사용자 비밀번호"></div>
+			</div><!-- Tap 시 class="on" 추가해야 합니다. --><button type="button" class="btn_login" id="loginBtn">로그인</button>
+		</div>
+		</div>
+
+		<div class="i_footer">
+			<p class="version">Ver.1.2.1</p>
+		</div>
+	</section>
+	
+	<footer>농협데이터시스템</footer>
+
+<script type="text/javascript">
+M.onReady(function(){
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+	
+	var loginId = document.querySelector('#loginId'),				// 로그인 id
+		loginPw = document.querySelector('#loginPw');			// 로그인 pw
+
+	// 로그인 버튼 클릭시	
+	$("#loginBtn").click(function () {
+		$('#loginBtn').addClass("on");
+		setTimeout(function(){
+			$('#loginBtn').removeClass("on");
+			if(loginId.value == null || loginId.value == ""){
+				alert('사번을 입력해주세요.');
+				return;
+			}
+			
+			if(loginPw.value == null || loginPw.value == ""){
+				alert('비밀번호를 입력해주세요.');
+				return;
+			}
+			
+			alert('로그인에 성공했습니다.');
+		}, 200);
+	});
+		
+	$(loginId).blur(function(){
+		window.scrollTo(0,0);
+	});
+	
+	$(loginPw).blur(function(){
+		window.scrollTo(0,0);
+	});
+}).onRestore(function(){
+	
+}).onHide(function(){
+	
+}).onResume(function(){
+	
+}).onPause(function(){
+	
+}).onDestroy(function(){
+	
+}).onBack(function(){
+	M.page.back();
+}).onKey(function(evt){
+	M.tool.log(evt.key, evt.events);
+	if (evt.key === 'home' && evt.events === 'keydown') {
+		WNLog('')
+	}
+});
+</script>
+</body>
+</html>

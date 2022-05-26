@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<title>Guide App</title>
+	<link rel="stylesheet" type="text/css" href="../../css/nds_salesmng_morpheus_style.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/sample.css" />
+	<script type="text/javascript" src="../../js/mcore.min.js"></script>
+</head>
+<body>
+	<header id="header">
+		<button type="button" class="btn_back" id="btn_back">이전</button>
+		<h1>배송조회</h1>
+	</header>
+
+	<section id="content">
+		<p class="cbtn_r">
+			<button type="button" class="cbtn_close" data-instance-class="menu-close">메뉴보기</button>
+		</p>
+		<!-- 조회영역 -->
+		<fieldset id="fieldset">
+			<dl>
+				<dt>주문일자</dt>
+				<dd><span class="input" id="orderDate"></span></dd>
+			</dl>
+			<dl>
+				<dt>거래처 코드</dt>
+				<dd>
+					<div class="input_wrap">
+						<input type="tel" id="accountCd" placeholder="입력하세요(ex:1234567)" maxLength=7>
+						<button type="button" class="btn_search" id="accountSearch">찾기</button>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt>전표번호</dt>
+				<dd><span class="select disabled" id="ordNumber">선택</span></dd>
+			</dl>
+			<dl>
+				<dt>차량정보</dt>
+				<dd><span class="select disabled" id="carInfo">선택</span></dd>
+			</dl>
+			<dl>
+				<dt>차량 소유주</dt>
+				<dd style="line-height:3.3rem;" id="carOwner"></dd><!--홍길동 (010-1234-5678)-->
+			</dl>
+			<!-- Tap시 class="on"추가
+				 비활성시 버튼태그에 disabled 옵션 추가 -->
+			<button type="button" class="input_search" id="searchBtn" disabled>검색</button>
+		</fieldset>
+
+		<!-- 조회전 활성화 -->
+		<div id="nodata" class="no_data">
+			<div>
+				<img src="../../img/nds_salesmng_nodata.png" alt="아이콘">
+				<p>배송정보 입력 후 <br/>[검색]버튼을 선택해주세요.</p>
+			</div>
+		</div>
+
+		<!-- 조회후 활성화 -->
+		<div class="yes_data none" id="yesdata">
+			<nav id="nav">
+				<ul class="tap">
+					<!-- Tap시 class="on"이 추가되여야 합니다. -->
+					<li class="on">배송현황</li>
+					<li>배송계획</li>
+					<li>주문정보</li>
+				</ul>
+			</nav>
+
+			<!-- 배송현황 area -->
+			<div id="wrapper">
+				<div>
+					<table class="gray">	
+						<colgroup>
+							<col style="width:27%">
+							<col style="width:25%">
+							<col style="width:20%">
+							<col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>처리일시</th>
+								<th>배송상태</th>
+								<th>남은거리</th>
+								<th>도착일시</th>
+							</tr>
+						</thead>
+						<tbody id="deliverState">
+							<tr>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+								<td>상차작업중</td>
+								<td>30.2km</td>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+							</tr>
+							<tr>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+								<td>상차작업중</td>
+								<td>30.2km</td>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+							</tr>
+							<tr>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+								<td>상차작업중</td>
+								<td>30.2km</td>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+							</tr>
+							<tr>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+								<td>상차작업중</td>
+								<td>30.2km</td>
+								<td>2013.10.16<span class="s_block">09:00</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- 배송계획 area -->
+			<div id="wrapper2" class="none">
+				<div>
+					<table class="gray">	
+						<colgroup>
+							<col style="width:12%">
+							<col style="width:28%">
+							<col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>순서</th>
+								<th>거래처명</th>
+								<th>주소</th>
+							</tr>
+						</thead>
+						<tbody id="deliverPlan">
+							<tr>
+								<td>1</td>
+								<td>코스트코양재</td>
+								<td class="ta_l">서울 서초구 양재동 6000</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>코스트코양재</td>
+								<td class="ta_l">서울 서초구 양재동 6000</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>코스트코양재</td>
+								<td class="ta_l">서울 서초구 양재동 6000</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>코스트코양재</td>
+								<td class="ta_l">서울 서초구 양재동 6000</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>코스트코양재</td>
+								<td class="ta_l">서울 서초구 양재동 6000</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- 주문정보 area -->
+			<div id="wrapper3" class="none">
+				<div>
+					<div class="title"><h2>합계정보</h2></div>
+					<table class="basic">
+						<colgroup>
+							<col style="width:35%">
+							<col>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>합계(수량)</th>
+								<td id="money1">100개</td>
+							</tr>
+							<tr>
+								<th>합계(금액)</th>
+								<td id="money2">10,000,000원</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="title"><h2>제품정보</h2></div>
+					<table class="gray">	
+						<colgroup>
+							<col style="width:60%">
+							<col style="width:20%">
+							<col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>제품명</th>
+								<th>단가</th>
+								<th>주문수량</th>
+							</tr>
+						</thead>
+						<tbody id="deliverInfo">
+							<tr>
+								<td class="ta_l">신라면 블랙<span class="s_block">(1829103012)</span></td>
+								<td></td>
+								<td>999개</td>
+							</tr>
+							<tr>
+								<td class="ta_l">신라면 블랙<span class="s_block">(1829103012)</span></td>
+								<td></td>
+								<td>999개</td>
+							</tr>
+							<tr>
+								<td class="ta_l">신라면 블랙<span class="s_block">(1829103012)</span></td>
+								<td></td>
+								<td>999개</td>
+							</tr>
+							<tr>
+								<td class="ta_l">신라면 블랙<span class="s_block">(1829103012)</span></td>
+								<td></td>
+								<td>999개</td>
+							</tr>
+							<tr>
+								<td class="ta_l">신라면 블랙<span class="s_block">(1829103012)</span></td>
+								<td></td>
+								<td>999개</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<script type="text/javascript" src="../../js/ui/sample/iscroll.js"></script>
+<script type="text/javascript">
+var pageHeight = window.innerHeight, // 실제 화면 높이
+	dateObj = new Date(),
+	tempMonth = '',
+	tempDate = '',
+	ordDate = '';
+M.onReady(function(event) {
+    // TODO : ready event handle code here
+    
+	// 메뉴닫기
+	$("[data-instance-class='menu-close']").click(function(){
+		M.page.back();
+	});
+	
+	tempMonth = dateObj.getMonth()+1 < 10 ? '0' + (dateObj.getMonth()+1) : dateObj.getMonth()+1;
+	tempDate = dateObj.getDate() < 10 ? '0' + dateObj.getDate() : dateObj.getDate();
+	
+	document.querySelector('#orderDate').innerHTML = dateObj.getFullYear() + '/' + tempMonth + '/' + tempDate;
+	ordDate = dateObj.getFullYear() + '' + tempMonth + '' + tempDate;
+	
+	loaded();
+}).onRestore(function(event) {
+    // TODO : restore event handle code here
+
+}).onHide(function(event) {
+    // TODO : hide event handle code here
+
+}).onResume(function(event) {
+    // TODO : resume event handle code here
+
+}).onDestroy(function(event) {
+    // TODO : destroy event handle code here
+
+}).onBack(function() {
+    // TODO : back event handle code here
+    M.page.back();
+}).onKey(function(event) {
+    // TODO : key event handle code here(android only)
+
+});
+
+/**
+ * 스크롤 객체 생성
+ */
+var myScroll,
+	myScroll2,
+	myScroll3;
+function loaded() {
+	bodyHeightSet();
+	if(myScroll == undefined || myScroll == ""){
+		myScroll = new iScroll('wrapper', {
+			useTransform: false,
+			onBeforeScrollStart: function (e) {
+			var target = e.target;
+			while (target.nodeType != 1) target = target.parentNode;
+			if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA' && target.tagName != 'A')
+				e.preventDefault();
+			}
+		});
+	}else{
+		myScroll.refresh();
+	}
+	
+	if(myScroll2 == undefined || myScroll2 == ""){
+		myScroll2 = new iScroll('wrapper2', {
+			useTransform: false,
+			onBeforeScrollStart: function (e) {
+			var target = e.target;
+			while (target.nodeType != 1) target = target.parentNode;
+			if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA' && target.tagName != 'A')
+				e.preventDefault();
+			}
+		});
+	}else{
+		myScroll2.refresh();
+	}
+	
+	if(myScroll3 == undefined || myScroll3 == ""){
+		myScroll3 = new iScroll('wrapper3', {
+			useTransform: false,
+			onBeforeScrollStart: function (e) {
+			var target = e.target;
+			while (target.nodeType != 1) target = target.parentNode;
+			if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA' && target.tagName != 'A')
+				e.preventDefault();
+			}
+		});
+	}else{
+		myScroll3.refresh();
+	}
+}
+
+/**
+ * 스크롤 높이 계산
+ */
+ 
+function bodyHeightSet() {
+	var scrollObj = document.getElementById("wrapper");
+	var scrollObj2 = document.getElementById("wrapper2");
+	var scrollObj3 = document.getElementById("wrapper3");
+	var header = document.getElementById("header");
+	var fieldset = document.getElementById("fieldset");
+	var nav = document.getElementById("nav");
+	var nodata = document.getElementById("nodata"); //데이터가 없는경우
+	var headerHeight = 0; // 해더 높이
+	var finalHeight = 0; // 최종적인 스크롤 영역 높이
+
+
+	if (header != undefined)
+		headerHeight = header.clientHeight;
+	if (fieldset != undefined)
+		fieldsetHeight = fieldset.clientHeight;
+	if (nav != undefined)
+		navHeight = nav.clientHeight;
+
+	finalHeight = pageHeight - headerHeight - fieldsetHeight - navHeight // 해더, 제외영역 빼는
+	scrollObj.style.height = finalHeight + "px";
+	scrollObj2.style.height = finalHeight + "px";
+	scrollObj3.style.height = finalHeight + "px";
+	nodata.style.height = finalHeight + "px"; //데이터가 없는경우
+}
+
+
+// 주문일자 버튼 클릭시 DatePicker
+var ordetDate = document.querySelector('#orderDate');
+orderDate.addEventListener('click', function(){
+
+	var initDate = orderDate.innerHTML.substring(0,4) + '' + orderDate.innerHTML.substring(5,7) + '' + orderDate.innerHTML.substring(8,10);
+	M.pop.date({
+        type      : 'YMD',
+        initDate  : initDate,
+        startDate : '19790101',
+        endDate   : '21001231'
+    },function(value){
+	    	ordetDate.innerHTML = value.yyyy + '/' + value.MM + '/' + value.dd;
+	    	ordDate = value.yyyy + '' + value.MM + '' + value.dd;
+    });
+}, false);
+
+
+// 거래처 코드 입력시
+$('#accountCd').keyup(function(){
+	if($('#accountCd').val().length == 7){
+		orderCdSearch();
+	}else{
+		$('#ordNumber').html('선택');
+		$('#carInfo').html('선택');
+		$('#carOwner').html('');
+		$('#ordNumber').addClass('disabled');
+		$('#carInfo').addClass('disabled');
+		$('#ordNumber').unbind('click', orderClick);
+		$('#searchBtn').attr('disabled', true);
+		$('#yesdata').addClass('none');
+		$('#nodata').removeClass('none');
+	}
+});
+
+// 거래처 코드 검색 버튼 클릭시
+$("#accountSearch").click(function () {
+	$('#accountSearch').addClass("on");
+	setTimeout(function(){
+		$('#accountSearch').removeClass("on");
+		alert('검색페이지로 이동')
+	}, 200);
+});
+
+// 이전 버튼 클릭시
+$("#btn_back").click(function () {
+	$('#btn_back').addClass("on");
+	setTimeout(function(){
+		onHistoryBackPage();
+	}, 200);
+});
+
+// 탭 클릭시
+$('.tap>li').click(function(){
+	if(this.className == 'on'){
+		return;
+	}
+	switch($(this).index()){
+		case 0 : 	// 배송현황
+			$('.tap>li').eq(0).addClass('on');
+			$('.tap>li').eq(1).removeClass('on');
+			$('.tap>li').eq(2).removeClass('on');
+			$('#wrapper2').addClass('none');
+			$('#wrapper3').addClass('none');
+			$('#wrapper').removeClass('none');
+		break;
+		
+		case 1 : 	// 배송계획
+			$('.tap>li').eq(1).addClass('on');
+			$('.tap>li').eq(0).removeClass('on');
+			$('.tap>li').eq(2).removeClass('on');
+			$('#wrapper').addClass('none');
+			$('#wrapper3').addClass('none');
+			$('#wrapper2').removeClass('none');
+		break;
+		
+		case 2 : 	// 주문정보
+			$('.tap>li').eq(2).addClass('on');
+			$('.tap>li').eq(0).removeClass('on');
+			$('.tap>li').eq(1).removeClass('on');
+			$('#wrapper').addClass('none');
+			$('#wrapper2').addClass('none');
+			$('#wrapper3').removeClass('none');
+		break;
+	}
+	pageHeight = window.innerHeight;
+	loaded();
+});
+
+// 전표번호 검색
+var orderCdData = '';
+var orderObject = new Object();
+function orderCdSearch(){
+	if($('#accountCd').val() == "1234567"){		// 2개인 경우로 처리
+		$('#ordNumber').removeClass('disabled');
+		$('#ordNumber').unbind("click").bind('click', orderClick);
+	}else{	// 1개인 경우로 처리
+		$('#ordNumber').addClass('disabled');
+		$('#ordNumber').unbind('click', orderClick);
+		$('#carInfo').html("11가 1234");
+		$('#carOwner').html("홍길동");
+		$("#searchBtn").attr('disabled');
+		$("#searchBtn").unbind('click',totalSearch);
+		$('#yesdata').addClass('none');
+		$('#nodata').removeClass('none');
+		carOwnerSearch();
+	}
+}
+
+// 전표번호 선택
+var orderIdx = 0;
+function orderClick(){
+	var $this = $(this);
+	M.pop.list({
+		'list' : [
+			{title:'1112222', value:'1112222'},
+			{title:'3334444', value:'3334444'}
+		],
+		'selected' : orderIdx
+	}, function(value){
+		if(value.status == "SUCCESS"){
+			$this.html(value.title);
+			orderIdx = value.index;
+			$('#carInfo').html('선택');
+			$('#carOwner').html('');
+			$("#searchBtn").attr('disabled');
+			$("#searchBtn").unbind('click',totalSearch);
+			$('#yesdata').addClass('none');
+			$('#nodata').removeClass('none');
+			carOwnerSearch();
+		}
+	});
+}
+
+// 차량번호 검색
+var carOwnerData = '';
+var carObject = new Object();
+var carNumber = '';
+function carOwnerSearch(){
+	$('#carInfo').addClass('disabled');
+	$('#carInfo').html("22나 3344");
+	$('#carOwner').html("김철수");
+	$("#searchBtn").attr('disabled', false);
+	$("#searchBtn").unbind("click").bind('click',totalSearch);
+}
+
+// 전체 검색 버튼 클릭시
+var totalData = '';
+function totalSearch(){
+	$('#searchBtn').addClass("on");
+	setTimeout(function(){
+		$('#searchBtn').removeClass("on");
+		$('#nodata').addClass('none');
+		$('#yesdata').removeClass('none');
+		pageHeight = window.innerHeight, // 실제 화면 높이
+		loaded();
+	}, 200);
+}
+
+
+</script>
+</body>
+</html>
